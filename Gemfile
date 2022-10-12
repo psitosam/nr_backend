@@ -45,6 +45,8 @@ group :development, :test do
   gem "rspec-rails"
   gem 'pry'
   gem 'figaro'
+  gem 'factory_bot_rails'
+  gem 'faker'
   
 end
 
@@ -59,4 +61,6 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
