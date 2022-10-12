@@ -20,7 +20,7 @@ class TweetSerializer
       attributes: {
         created_at: tweet.created_at,
         text: tweet.text,
-        edit_history_tweet_ids: tweet.id
+        edit_history_tweet_ids: tweet.edit_history_tweet_ids
       }
     }
   end 

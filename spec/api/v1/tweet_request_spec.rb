@@ -26,7 +26,7 @@ RSpec.describe 'tweet request' do
     tweets = parsed[:data]
     expect(tweets.class).to eq(Array)
     expect(tweets.length).to eq(30)
-    # Testing that the request returns success, and that it is coming back as an Array with each Tweet being an element within the Array, with a total length equal to the number of fake Tweets created above.
+    # Testing that the request returns success, and that it is coming back from the database as an Array with each Tweet being an element within the Array, with a total length equal to the number of fake Tweets created above.
 
     tweets.each do |tweet|
       expect(tweet).to have_key(:attributes)
@@ -35,9 +35,27 @@ RSpec.describe 'tweet request' do
       expect(tweet[:attributes]).to have_key(:text)
       expect(tweet[:attributes][:text]).to be_a(String)
       expect(tweet[:attributes]).to have_key(:edit_history_tweet_ids)
-      expect(tweet[:attributes][:edit_history_tweet_ids]).to eq(tweet[:id])
+      expect(tweet[:attributes][:edit_history_tweet_ids]).to be_a(Array)
     end
     # Checking for the correct shape and key/value pairs expected.
+  end 
+
+  it 'show action returns one tweet by id' do 
+    tweet_1 = create(:tweet)
+
+    get "/api/v1/tweets/#{tweet_1.id}"
+
+    parsed = JSON.parse(response.body, symbolize_names:true)
+
+    tweet = parsed[:data]
+
+    expect(tweet).to have_key(:attributes)
+    expect(tweet[:attributes]).to have_key(:created_at)
+    expect(tweet[:attributes][:created_at]).to be_a(String)
+    expect(tweet[:attributes]).to have_key(:text)
+    expect(tweet[:attributes][:text]).to be_a(String)
+    expect(tweet[:attributes]).to have_key(:edit_history_tweet_ids)
+    expect(tweet[:attributes][:edit_history_tweet_ids]).to be_a(Array)
   end 
 
 end 
