@@ -13,5 +13,13 @@ class TwitterService
       f.headers['Authorization'] = "Bearer #{ENV['twitter_bearer_token']}"
     end
   end 
+  # require 'twitter'
+  # @client = Twitter::REST::Client.new do |config|
+  #   config.consumer_key = "#{ENV['twitter_api_key']}"
+  #   config.consumer_secret = "#{ENV['twitter_api_key_secret']}"
+  # end 
 
+  # def self.get_recent_tweets(query)
+  #   @client.search("#{query}", result_type: "recent").take(10)
+  # end 
 end 

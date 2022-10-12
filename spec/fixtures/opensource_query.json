@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "created_at": "2022-10-11T23:21:21.000Z",
+      "edit_history_tweet_ids": [
+        "1579975472817254400"
+      ],
+      "text": "RT @MarlinFirmware: We decided to take it easy without the pressure of preparing a talk this year at #ERRF, and were never approached by yo…",
+      "id": "1579975472817254400"
+    },
+    {
+      "created_at": "2022-10-11T23:20:50.000Z",
+      "edit_history_tweet_ids": [
+        "1579975341472624640"
+      ],
+      "text": "RT @AllThingsOpen: Thank you @isovalent for sponsoring #AllThingsOpen at the Bronze Level! Their support helps us put together 160+ speaker…",
+      "id": "1579975341472624640"
+    },
+    {
+      "created_at": "2022-10-11T23:19:53.000Z",
+      "edit_history_tweet_ids": [
+        "1579975102044643328"
+      ],
+      "text": "RT @rafael52987: #programming  #CodeNewbie #reactjs #bugbounty #DataScience #infosec #gamedev #BigData #Coding #DataScience #NeuralNetworks…",
+      "id": "1579975102044643328"
+    },
+    {
+      "created_at": "2022-10-11T23:19:53.000Z",
+      "edit_history_tweet_ids": [
+        "1579975102023667712"
+      ],
+      "text": "RT @AlexRosu1989: #fullstack #developer #WEB3 #codinglife #pythoncode #java #computerscience #opensource #coding #css #html #python #100Day…",
+      "id": "1579975102023667712"
+    },
+    {
+      "created_at": "2022-10-11T23:19:53.000Z",
+      "edit_history_tweet_ids": [
+        "1579975102015606788"
+      ],
+      "text": "RT @IntelligenceNa2: Knowledge without instructions only serves to sell problems to the same knowledge that had not provided its own instru…",
+      "id": "1579975102015606788"
+    },
+    {
+      "created_at": "2022-10-11T23:19:53.000Z",
+      "edit_history_tweet_ids": [
+        "1579975102002696192"
+      ],
+      "text": "RT @stargeek13: 'Kamigen Issue 2 Cover' Fitted Scoop T-Shirt https://t.co/tv5RHyumQH  #indiegamedev #kamigen #scifi #cyberpunk #mystical #t…",
+      "id": "1579975102002696192"
+    },
+    {
+      "created_at": "2022-10-11T23:19:46.000Z",
+      "edit_history_tweet_ids": [
+        "1579975072491900929"
+      ],
+      "text": "RT @IntelligenceNa2: Knowledge without instructions only serves to sell problems to the same knowledge that had not provided its own instru…",
+      "id": "1579975072491900929"
+    },
+    {
+      "created_at": "2022-10-11T23:19:46.000Z",
+      "edit_history_tweet_ids": [
+        "1579975070658990083"
+      ],
+      "text": "RT @rafael52987: #programming  #CodeNewbie #reactjs #bugbounty #DataScience #infosec #gamedev #BigData #Coding #DataScience #NeuralNetworks…",
+      "id": "1579975070658990083"
+    },
+    {
+      "created_at": "2022-10-11T23:19:45.000Z",
+      "edit_history_tweet_ids": [
+        "1579975068637368322"
+      ],
+      "text": "RT @rafael52987: #programming  #CodeNewbie #reactjs #bugbounty #DataScience #infosec #gamedev #BigData #Coding #DataScience #NeuralNetworks…",
+      "id": "1579975068637368322"
+    },
+    {
+      "created_at": "2022-10-11T23:19:43.000Z",
+      "edit_history_tweet_ids": [
+        "1579975059409899521"
+      ],
+      "text": "RT @LunaSecIO: Shout out to Sentry (@getsentry) for becoming a monthly sponsor to LunaSec on GitHub! Thank you! 😍\n\nYou can join Sentry in s…",
+      "id": "1579975059409899521"
+    }
+  ],
+  "meta": {
+    "newest_id": "1579975472817254400",
+    "oldest_id": "1579975059409899521",
+    "result_count": 10,
+    "next_token": "b26v89c19zqg8o3fpzbngs72uhg5ul0go5bnrhsigdhfh"
+  }
+}

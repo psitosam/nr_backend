@@ -1,6 +1,5 @@
 class Tweet < ApplicationRecord
-  validates_presence_of :body,
+  validates_presence_of :text,
                         :created_at,
-                        :tweet_id,
                         :edit_history_tweet_ids
 end
