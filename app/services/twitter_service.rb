@@ -1,9 +1,9 @@
 class TwitterService
   def self.get_recent_tweets(query)
     response = conn.get("/2/tweets/search/recent") do |f|
-      f.params[:query] = query
+      f.params[:query] = "#{query}%20lang:en"
       f.params[:max_results] = 10
-      f.params["tweet.fields"] = "created_at"
+      f.params["tweet.fields"] = "created_at,lang"
     end
     JSON.parse(response.body, symbolize_names: true)
   end 
