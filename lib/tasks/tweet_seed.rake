@@ -1,3 +1,5 @@
+require '../app/models/tweet'
+
 class TweetSeed 
   def self.seed 
     Tweet.destroy_all 
