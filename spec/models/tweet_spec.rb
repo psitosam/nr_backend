@@ -8,10 +8,11 @@ RSpec.describe Tweet, type: :model do
   end 
 
   it 'exists and has readable attributes' do 
-    tweet = Tweet.new(text: "lorem ipsum", created_at: "2022-10-11T23:21:21.000Z")
+    tweet = Tweet.create!(created_at: "2022-10-12T18:11:18.000Z", text: "NASA Awards Contracts to Assess Near-Space Communications Capabilities https://t.co/NLVzuGsExg #NASA #space", edit_history_tweet_ids: ["1580259830799159296"])
 
     expect(tweet).to be_a(Tweet)
-    expect(tweet.text).to eq("lorem ipsum")
-    expect(tweet.created_at).to eq("2022-10-11T23:21:21.000Z")
+    expect(tweet.created_at).to eq("2022-10-12T18:11:18.000Z")
+    expect(tweet.text).to eq("NASA Awards Contracts to Assess Near-Space Communications Capabilities https://t.co/NLVzuGsExg #NASA #space")
+    expect(tweet.edit_history_tweet_ids).to eq(["1580259830799159296"])
   end 
 end 
