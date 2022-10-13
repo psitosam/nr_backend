@@ -10,7 +10,7 @@ RSpec.describe 'tweet request' do
     # Using the Twitter API mock response to gather correct data
     info = test[:data][0]
     Tweet.create!(info)
-    
+    #  Checking to make sure the data matches what is needed to build a Tweet object.
     expect(Tweet.last).to be_a(Tweet)
   end 
 
