@@ -1,4 +1,4 @@
-require 'tweet_seed'
+require './tweet_seed'
 
 desc "This task is called by the Cron to Go"
 namespace :seed do 

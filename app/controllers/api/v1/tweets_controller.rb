@@ -4,7 +4,12 @@ class Api::V1::TweetsController < ApplicationController
   end 
 
   def index
-    render json: TweetSerializer.multiple_tweets(Tweet.all)
+    if params[:query]
+      response = TweetFacade.find_by_topic(params[:query])
+      render json: TweetSerializer.live_tweets(response)
+    else
+      render json: TweetSerializer.database_tweets(Tweet.all)
+    end
   end 
 
   def show
@@ -18,7 +23,7 @@ class Api::V1::TweetsController < ApplicationController
   
   private 
     def tweet_params
-      params.permit(:created_at, :text, :edit_history_tweet_ids)
+      params.permit(:created_at, :text, :edit_history_tweet_ids, :query)
     end
 
     def not_found 

@@ -1,4 +1,5 @@
-require '../app/models/tweet'
+require './app/models/tweet'
+
 
 class TweetSeed 
   def self.seed 

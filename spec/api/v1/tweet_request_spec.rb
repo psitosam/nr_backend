@@ -14,7 +14,7 @@ RSpec.describe 'tweet request' do
     expect(Tweet.last).to be_a(Tweet)
   end 
 
-  it 'index action returns all tweets in the db' do 
+  it 'index action without params returns all tweets in the db' do 
     create_list(:tweet, 30)
     # Factory bot and Faker gems used here to build test data
     get "/api/v1/tweets"
@@ -39,6 +39,16 @@ RSpec.describe 'tweet request' do
     end
     # Checking for the correct shape and key/value pairs expected.
   end 
+
+  it 'index action with params returns tweets by topic' do
+    response_body = File.read("spec/fixtures/healthcare_query.json")
+    stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare&tweet.fields=created_at").
+         to_return(status: 200, body: response_body, headers: {})
+    
+    expect(TweetFacade).to receive(:find_by_topic).and_call_original
+    get "/api/v1/tweets", params: {query: "healthcare"}
+    
+  end
 
   it 'show action returns one tweet by id' do 
     tweet_1 = create(:tweet)
