@@ -1,10 +1,10 @@
 class Tweet < ApplicationRecord
-  attr_reader :id, :text, :created_at, :edit_history_tweet_ids
+  attr_reader :id, :text, :created_at, :edit_history_tweet_ids, :lang
 
   def initialize(data)
-    binding.pry
     @text = data[:text]
     @created_at = data[:created_at]
     @edit_history_tweet_ids = data[:edit_history_tweet_ids]
+    @lang = data[:lang]
   end 
 end
