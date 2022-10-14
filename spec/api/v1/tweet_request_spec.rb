@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe 'tweet request' do 
   it 'successful response returns info to create Tweets' do 
     response_body = File.read("spec/fixtures/healthcare_query.json")
-    stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare%2520lang:en&tweet.fields=created_at,lang").
-         with(
-           headers: {
-       	  'Accept'=>'*/*',
-       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-       	  'Authorization'=>"Bearer #{ENV['twitter_bearer_token']}",
-       	  'User-Agent'=>'Faraday v2.6.0'
-           }).
-         to_return(status: 200, body: response_body, headers: {})
+    stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare%20lang:en&tweet.fields=created_at,lang").
+    with(
+      headers: {
+    'Accept'=>'*/*',
+    'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+    'Authorization'=>"Bearer #{ENV['twitter_bearer_token']}",
+    'User-Agent'=>'Faraday v2.6.0'
+      }).
+    to_return(status: 200, body: response_body, headers: {})
     
     test = TwitterService.get_recent_tweets("healthcare")
     # Using the Twitter API mock response to gather correct data
@@ -50,19 +50,19 @@ RSpec.describe 'tweet request' do
 
   it 'index action with params returns tweets by topic' do
     response_body = File.read("spec/fixtures/healthcare_query.json")
-    stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare%2520lang:en&tweet.fields=created_at,lang").
-         with(
-           headers: {
-       	  'Accept'=>'*/*',
-       	  'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-       	  'Authorization'=>"Bearer #{ENV['twitter_bearer_token']}",
-       	  'User-Agent'=>'Faraday v2.6.0'
-           }).
-         to_return(status: 200, body: response_body, headers: {})
+    stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare%20lang:en&tweet.fields=created_at,lang").
+    with(
+      headers: {
+    'Accept'=>'*/*',
+    'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+    'Authorization'=>"Bearer #{ENV['twitter_bearer_token']}",
+    'User-Agent'=>'Faraday v2.6.0'
+      }).
+    to_return(status: 200, body: response_body, headers: {})
     
     expect(TweetFacade).to receive(:find_by_topic).and_call_original
     get "/api/v1/tweets", params: {query: "healthcare"}
-    
+    # Checking that the index action uses the first path and sends info to Facade.
   end
 
   it 'show action returns one tweet by id' do 

@@ -9,11 +9,13 @@ def tweet_dataset
   query_array.each do |query|
     puts "Seeding #{query} data"
     tweets = TwitterService.get_recent_tweets(query)
+    binding.pry
     tweets[:data].each do |t|
       Tweet.create!(
         text: t[:text],
         created_at: t[:created_at],
-        edit_history_tweet_ids: t[:edit_history_tweet_ids]
+        edit_history_tweet_ids: t[:edit_history_tweet_ids],
+        lang: t[:lang]
       )
     end 
   end
