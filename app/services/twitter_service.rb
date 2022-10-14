@@ -6,6 +6,7 @@ class TwitterService
     #   f.params[:max_results] = 10
     #   f.params["tweet.fields"] = "created_at,lang"
     # end
+    # The above commented out code did not work to pass correct query params to the Twitter API. Right now the URI and query path is hard-coded for functionality.
     JSON.parse(response.body, symbolize_names: true)
   end 
 

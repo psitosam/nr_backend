@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'tweet request' do 
-  it 'successful response returns info to create Tweets' do 
+  it 'successful index response returns info to create Tweets' do 
     response_body = File.read("spec/fixtures/healthcare_query.json")
     stub_request(:get, "https://api.twitter.com/2/tweets/search/recent?max_results=10&query=healthcare%20lang:en&tweet.fields=created_at,lang").
     with(
@@ -81,6 +81,18 @@ RSpec.describe 'tweet request' do
     expect(tweet[:attributes][:text]).to be_a(String)
     expect(tweet[:attributes]).to have_key(:edit_history_tweet_ids)
     expect(tweet[:attributes][:edit_history_tweet_ids]).to be_a(Array)
+  end 
+
+  it 'show action sad path returns error message' do 
+    id = create(:tweet).id
+    get "/api/v1/tweets/#{id + 1}"
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    tweet_1 = parsed[:data]
+
+    expect(response.status).to eq(404)
+    expect(tweet_1).to have_key(:message)
+    expect(tweet_1[:message]).to eq('No tweet matches this id')
   end 
 
 end 
