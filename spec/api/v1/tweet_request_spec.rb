@@ -83,4 +83,16 @@ RSpec.describe 'tweet request' do
     expect(tweet[:attributes][:edit_history_tweet_ids]).to be_a(Array)
   end 
 
+  it 'show action sad path returns error message' do 
+    id = create(:tweet).id
+    get "/api/v1/tweets/#{id + 1}"
+
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    tweet_1 = parsed[:data]
+
+    expect(response.status).to eq(404)
+    expect(tweet_1).to have_key(:message)
+    expect(tweet_1[:message]).to eq('No tweet matches this id')
+  end 
+
 end 
