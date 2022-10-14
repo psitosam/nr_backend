@@ -9,7 +9,6 @@ def tweet_dataset
   query_array.each do |query|
     puts "Seeding #{query} data"
     tweets = TwitterService.get_recent_tweets(query)
-    binding.pry
     tweets[:data].each do |t|
       Tweet.create!(
         text: t[:text],
