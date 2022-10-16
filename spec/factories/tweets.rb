@@ -5,6 +5,7 @@ FactoryBot.define do
     created_at { DateTime.now }
     edit_history_tweet_ids { [Faker::Number.number(digits: 19)] }
     lang { "en" }
+    subject { "" }
   end 
 
 end 
