@@ -1,5 +1,5 @@
 # Show Me Tweets
-Welcome to Show Me Tweets! This is a backend portion of 2-part application deisigned with a separate *[Frontend](https://github.com/psitosam/nr_frontend)*. This backendend application is responsible for retrieving tweet data from the Twitter API. Currently, the topics of tweets are limited to "healthcare", "nasa", and "opensource". The tweets retrieved are limited to those categorized as being in the English language. The backend application periodically (every 10 minutes) retrieves ten tweets for each category from the Twitter API and stores them in the database.
+Welcome to Show Me Tweets! This is a backend portion of 2-part application deisigned with a separate *[Frontend](https://github.com/psitosam/nr_frontend)*. This backend application is responsible for retrieving tweet data from the Twitter API. Currently, the topics of tweets are limited to "healthcare", "nasa", and "opensource". The tweets retrieved are limited to those categorized as being in the English language. In the deployed application, the backend periodically (every 10 minutes) retrieves ten tweets for each category from the Twitter API and stores them in the database, via the rake db:seed command located in a Cron Job on the Heroku CLI.
 
 ## Implementation
 
@@ -26,7 +26,7 @@ In the future, additional functionality may be built out that requires additiona
 ```bash
 rails s
 ```
-on both the FE and BE applications to ensure both are running simultaneously.
+on both the FE and BE applications to ensure both are running simultaneously. Double check that the config/puma.rb files are set to listening on different ports! Right now, the backend is set up to listen on localhost:3000, and the frontend listens on localhost:5000.
 
 6. You're up and running! We recommend you run
 ```bash
@@ -149,7 +149,7 @@ Retrieves 10 tweets from the Twitter API for the query parameter "opensource", i
     }
 }
 ```
-* This information is then turned into Tweet objects and stored locally in the database. The other two queries look similar, but pass either "NASA" or "healthcare" as the query parameters.
+* This information is then turned into Tweet objects, and the Tweet is given an additional attribute ("subject") via the rake db:seed command and stored locally in the database. The "subject" attribute is how the Tweets Controller queries the local database to respond to queries from the front end. The other two queries look similar, but pass either "NASA" or "healthcare" as the query parameters.
 * When running, the backend application runs these queries sequentially every ten minutes to ensure up-to-date Tweets are retrieved, after destroying all the previous Tweets in the database. This Cron Job was built in the Heroku UI, a requirement for using Heroku to deploy the application. The code for this job is located in seeds.rb, and the command to the Cron Job is simply:
 ```bash
 rake db:seed
@@ -162,108 +162,118 @@ Example response, query parameters - `opensource`
 
 ```
 {
-    "data": [
-        {
-            "id": "1581315481876955139",
-            "attributes": {
-                "created_at": "2022-10-15T16:06:04.000Z",
-                "text": "RT @FuturegrooveNET: Interested in a #music #audio #production #workstation? Download AV Linux MX Edition here, today Oct 15, 2022: https:/…",
-                "edit_history_tweet_ids": [
-                    "1581315481876955139"
-                ]
-            }
-        },
-        {
-            "id": "1581315423701987329",
-            "attributes": {
-                "created_at": "2022-10-15T16:05:51.000Z",
-                "text": "RT @FuturegrooveNET: Interested in a #music #audio #production #workstation? Download AV Linux MX Edition here, today Oct 15, 2022: https:/…",
-                "edit_history_tweet_ids": [
-                    "1581315423701987329"
-                ]
-            }
-        },
-        {
-            "id": "1581315357104427009",
-            "attributes": {
-                "created_at": "2022-10-15T16:05:35.000Z",
-                "text": "RT @FuturegrooveNET: Interested in a #music #audio #production #workstation? Download AV Linux MX Edition here, today Oct 15, 2022: https:/…",
-                "edit_history_tweet_ids": [
-                    "1581315357104427009"
-                ]
-            }
-        },
-        {
-            "id": "1581315314553618433",
-            "attributes": {
-                "created_at": "2022-10-15T16:05:25.000Z",
-                "text": "RT @Radiology_AI: Code and Data Sharing Practices in the Radiology AI Literature: A Meta-Research Study https://t.co/GCFph5UQ93 @Jere_Sulam…",
-                "edit_history_tweet_ids": [
-                    "1581315314553618433"
-                ]
-            }
-        },
-        {
-            "id": "1581315224363094016",
-            "attributes": {
-                "created_at": "2022-10-15T16:05:03.000Z",
-                "text": "Interested in a #music #audio #production #workstation? Download AV Linux MX Edition here, today Oct 15, 2022: https://t.co/tEg65FsCRV | #Retweet #rtitbot #AI '@BlazedRTs '@RexRTs '@sme_rt #Linux #OpenSource #100daysofcode #sound #design #coding | https://t.co/LgymKUnGjj",
-                "edit_history_tweet_ids": [
-                    "1581315224363094016"
-                ]
-            }
-        },
-        {
-            "id": "1581314982310207488",
-            "attributes": {
-                "created_at": "2022-10-15T16:04:05.000Z",
-                "text": "RT @eForensics_Mag: Alan Roder \"IoT: Past, Present and what has yet to come” #infosec #cybersecurity #redteam #pentest #pentesting  #hackin…",
-                "edit_history_tweet_ids": [
-                    "1581314982310207488"
-                ]
-            }
-        },
-        {
-            "id": "1581314888898469888",
-            "attributes": {
-                "created_at": "2022-10-15T16:03:43.000Z",
-                "text": "RT @GoreRemington: Goodnight everyone, it's been a crazy day. But at least we have the weekend. Just remember, you are loved, you are amazi…",
-                "edit_history_tweet_ids": [
-                    "1581314888898469888"
-                ]
-            }
-        },
-        {
-            "id": "1581314457233285120",
-            "attributes": {
-                "created_at": "2022-10-15T16:02:00.000Z",
-                "text": "The New Stack's @alexwilliams sat down with @HashiCorp co-founder and CTO, @Armon Dadgar, for an interview at the HashiConf Global conference in LA.   https://t.co/kt9MhYPmhc #OpenSource",
-                "edit_history_tweet_ids": [
-                    "1581314457233285120"
-                ]
-            }
-        },
-        {
-            "id": "1581314201142034432",
-            "attributes": {
-                "created_at": "2022-10-15T16:00:59.000Z",
-                "text": "https://t.co/OvmoEUVX0l\nGhost is an open source blogging platform.\n#iaas #workspace #OpenSource #saasalternatives #nocode #lowcode #cloudapps #einfach\n#CMS System #HubSpot https://t.co/vdE2hM3f5L",
-                "edit_history_tweet_ids": [
-                    "1581314201142034432"
-                ]
-            }
-        },
-        {
-            "id": "1581313958597824513",
-            "attributes": {
-                "created_at": "2022-10-15T16:00:01.000Z",
-                "text": "Alan Roder \"IoT: Past, Present and what has yet to come” #infosec #cybersecurity #redteam #pentest #pentesting  #hacking #hackers #coding #opensource #Linux #windows https://t.co/3bx1x16hCC",
-                "edit_history_tweet_ids": [
-                    "1581313958597824513"
-                ]
-            }
-        }
-    ]
+  "data": [
+    {
+      "id": 41,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:17.000Z",
+        "text": "RT @AI_Advice: The Ultimate List of #DataScience Skills\n\n#5G #100DaysOfCode #AI #Analytics #ArtificialIntelligence #BigData #Cloud #Data #I…",
+        "edit_history_tweet_ids": [
+          "1581644702058967040"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 42,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:17.000Z",
+        "text": "RT @AI_Advice: #AI/ #DataScience/ #MachineLearning:\nFREE #Infographic on Deep Learning Use Cases\n\n#5G #100DaysOfCode #Analytics #Artificial…",
+        "edit_history_tweet_ids": [
+          "1581644702046035968"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 43,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:17.000Z",
+        "text": "RT @AI_Advice: #AI/ #DataScience/ #MachineLearning:\nFREE #Infographic on Deep Learning Use Cases\n\n#5G #100DaysOfCode #Analytics #Artificial…",
+        "edit_history_tweet_ids": [
+          "1581644702042161159"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 44,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:17.000Z",
+        "text": "RT @AI_Advice: #MachineLearning Takes Hold in Nuclear Physics\n\nhttps://t.co/ZklenvyZBH\n\n#5G #100DaysOfCode #AI #Analytics #ArtificialIntell…",
+        "edit_history_tweet_ids": [
+          "1581644701996052480"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 45,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:16.000Z",
+        "text": "RT @AI_Advice: #AI/ #DataScience/ #MachineLearning:\nFREE #Infographic on Deep Learning Use Cases\n\n#5G #100DaysOfCode #Analytics #Artificial…",
+        "edit_history_tweet_ids": [
+          "1581644699362013184"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 46,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:09.000Z",
+        "text": "RT @ManavGambhir11: An amazing session to attend.Learnt about whatnot, from opensource to web3, I got to know about all. An amazing opportu…",
+        "edit_history_tweet_ids": [
+          "1581644671721566209"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 47,
+      "attributes": {
+        "created_at": "2022-10-16T13:54:01.000Z",
+        "text": "RT @AI_Advice: #AI/ #DataScience/ #MachineLearning:\nFREE #Infographic on Deep Learning Use Cases\n\n#5G #100DaysOfCode #Analytics #Artificial…",
+        "edit_history_tweet_ids": [
+          "1581644635189182465"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 48,
+      "attributes": {
+        "created_at": "2022-10-16T13:53:59.000Z",
+        "text": "RT @AI_Advice: The Ultimate List of #DataScience Skills\n\n#5G #100DaysOfCode #AI #Analytics #ArtificialIntelligence #BigData #Cloud #Data #I…",
+        "edit_history_tweet_ids": [
+          "1581644627203227649"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 49,
+      "attributes": {
+        "created_at": "2022-10-16T13:53:58.000Z",
+        "text": "RT @Khushi1950: What I'm taking away from #hackthisfallhacktoberfest meet-up today?\n\n\"Come for swags, stay for the community❤️\"\n\nIt's a rea…",
+        "edit_history_tweet_ids": [
+          "1581644623562567681"
+        ],
+        "subject": "opensource"
+      }
+    },
+    {
+      "id": 50,
+      "attributes": {
+        "created_at": "2022-10-16T13:53:56.000Z",
+        "text": "RT @AI_Advice: #AI/ #DataScience/ #MachineLearning:\nFREE #Infographic on Deep Learning Use Cases\n\n#5G #100DaysOfCode #Analytics #Artificial…",
+        "edit_history_tweet_ids": [
+          "1581644613609082882"
+        ],
+        "subject": "opensource"
+      }
+    }
+  ]
 }
 ```
 
