@@ -23,7 +23,7 @@ class Api::V1::TweetsController < ApplicationController
   
   private 
     def tweet_params
-      params.permit(:created_at, :text, :edit_history_tweet_ids, :query)
+      params.permit(:created_at, :text, :edit_history_tweet_ids, :query, :subject)
     end
 
     def not_found 
